@@ -1,5 +1,7 @@
 package com.scabrera.studentHelper.model;
 
+import com.scabrera.studentHelper.util.ConsoleHelper;
+
 public class Profesor extends Persona{
     private String asignatura;
     public Profesor(String nombre, String apellidos, int edad, String asignatura) {
@@ -12,6 +14,6 @@ public class Profesor extends Persona{
         System.out.println("Hola me llamo " + getNombre() + " " + getApellidos() + " y soy tu profesor de " + asignatura);
     }
     public void enseñar(){
-        System.out.println("Estoy enseñando");
+        ConsoleHelper.printTitle("Estoy enseñando");
     }
 }

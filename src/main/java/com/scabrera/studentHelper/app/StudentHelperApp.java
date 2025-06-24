@@ -1,27 +1,27 @@
 package com.scabrera.studentHelper.app;
 
+import com.scabrera.studentHelper.Controller.MultiplicationTableController;
 import com.scabrera.studentHelper.model.Estudiante;
 import com.scabrera.studentHelper.model.Profesor;
-import com.scabrera.studentHelper.service.CalculatorService;
-import com.scabrera.studentHelper.util.InputHelper;
+import com.scabrera.studentHelper.Controller.CalculatorController;
+import com.scabrera.studentHelper.util.ConsoleHelper;
 
 public class StudentHelperApp {
     public static void run() {
         menuIdentidad();
-        InputHelper.closeScanner();
+        ConsoleHelper.close();
     }
 
     private static void menuIdentidad(){
-        System.out.println("Menu de inicio");
-        System.out.println("1 - Profesorado");
-        System.out.println("2 - Estudiantes");
-        System.out.println("Selecciona tu identidad:");
-        int opcion = InputHelper.readInt();
-        InputHelper.readLine();
+        ConsoleHelper.printTitle("Menu de inicio");
+        ConsoleHelper.printOption(1, "Profesorado");
+        ConsoleHelper.printOption(2, "Estudiantes");
+        int opcion = ConsoleHelper.readInt("Selecciona tu identidad");
+
         switch (opcion){
             case 1 -> funcionesProfesor();
             case 2 -> funcionesEstudiante();
-            default -> System.out.println("Opcion invalida");
+            default -> ConsoleHelper.printTitle("Opcion invalida");
         }
     }
 
@@ -31,13 +31,10 @@ public class StudentHelperApp {
         menuEstudiante();
     }
     private static void loggeoEstudiante(){
-        System.out.println("Introduce tus datos");
-        System.out.println("Nombre: ");
-        String nombre = InputHelper.readLine();
-        System.out.println("Apellidos: ");
-        String apellidos = InputHelper.readLine();
-        System.out.println("Edad: ");
-        int edad = InputHelper.readInt();
+        ConsoleHelper.printTitle("Introduce tus datos");
+        String nombre = ConsoleHelper.readLine("Nombre");
+        String apellidos = ConsoleHelper.readLine("Apellidos");
+        int edad = ConsoleHelper.readInt("Edad");
         Estudiante e = new Estudiante(nombre, apellidos, edad);
         e.saludar();
         e.estudiar();
@@ -45,20 +42,20 @@ public class StudentHelperApp {
 
     private static void menuEstudiante(){
         do {
-            System.out.println("A que herramientas quieres acceder");
-            System.out.println("1 - Calculadora");
-            System.out.println("2 - Tablas de multiplicar");
-            System.out.println("0 - Salir");
-            int opcion = InputHelper.readInt();
+            ConsoleHelper.printTitle("Menu de herramientas");
+            ConsoleHelper.printOption (1, "Calculadora");
+            ConsoleHelper.printOption(2, "Tablas de multiplicar");
+            ConsoleHelper.printOption(0, "Salir");
+            int opcion = ConsoleHelper.readInt("Introduce una opcion");
 
             if (opcion == 0){
                 break;
             }
 
             switch (opcion){
-                case 1 -> CalculatorService.calculadora();
-                case 2 -> System.out.println("Menu tablas");
-                default -> System.out.println("Opcion invalida");
+                case 1 -> CalculatorController.showMenu();
+                case 2 -> MultiplicationTableController.showMenu();
+                default -> ConsoleHelper.printTitle("Opcion invalida");
             }
 
         }while (true);
@@ -69,14 +66,11 @@ public class StudentHelperApp {
         loggeoProfesor();
     }
     private static void loggeoProfesor(){
-        System.out.println("Introduce tus datos");
-        System.out.println("Nombre");
-        String nombre = InputHelper.readLine();
-        System.out.println("Apellidos");
-        String apellidos = InputHelper.readLine();
+        ConsoleHelper.printTitle("Introduce tus datos");
+        String nombre = ConsoleHelper.readLine("Nombre");
+        String apellidos = ConsoleHelper.readLine("Apellidos");
         int edad = 0;
-        System.out.println("Asignatura impartida");
-        String asignatura = InputHelper.readLine();
+        String asignatura = ConsoleHelper.readLine("Asignatura impartida");
         Profesor pf = new Profesor(nombre, apellidos, edad, asignatura);
         pf.saludar();
         pf.enseñar();
